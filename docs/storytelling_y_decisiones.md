@@ -60,3 +60,22 @@
 2. Probar D2 con un **experimento controlado** (grupo con campaña vs grupo sin campaña).
 3. Modelar la probabilidad de recompra con más variables (categoría del primer producto, canal).
 4. Automatizar la actualización del dashboard con una conexión directa a la base de ventas.
+
+---
+
+## 6. Modelo predictivo y decisión D7 (proyecto final)
+
+> Cifras del notebook 06 (`data/processed/modelo_predictivo/`).
+
+**Qué agrega el modelo a la historia.** El análisis descriptivo dice *dónde* está el problema (retención); el modelo dice *a quién* dirigirse. Con solo el hábito reciente de compra se predice la recompra a 90 días con PR-AUC 0,737 y ROC-AUC 0,800 en un periodo que el modelo no vio (+18 % de PR-AUC sobre la regla de recencia). El 30 % de clientes con mayor puntaje concentra el 58 % de las recompras y el 80 % del ingreso futuro.
+
+| # | Decisión | Evidencia | KPI para monitorearla | Riesgo / cautela |
+|---|---|---|---|---|
+| **D7** | **Retención personalizada para los 303 clientes *valiosos en riesgo*** (alto gasto histórico, baja probabilidad de recompra; 9 % del gasto histórico) y **sin descuentos para los 1.160 *fieles seguros*** (72 % del gasto) | Modelo (notebook 06) y matriz de acción | Recompra a 90 días del grupo tratado vs. un grupo de control | El modelo no mide efecto causal de la campaña: probar con un experimento antes de escalar |
+
+**Limitaciones específicas del modelo**
+- Un único ciclo estacional en el entrenamiento: la estacionalidad está subestimada.
+- Probabilidades optimistas (+13 puntos) en periodos de temporada floja: usar como ranking y recalibrar con datos recientes.
+- Poca confiabilidad con clientes de un solo pedido (ROC-AUC 0,669; el modelo detecta solo el 5 % de sus recompras con el umbral elegido).
+- Sin costos ni márgenes: la matriz de acción prioriza, no calcula rentabilidad.
+- Ético: el modelo no debe usarse para negar servicio, precio o crédito.
