@@ -1,0 +1,65 @@
+{
+  "modelo": "Random Forest",
+  "umbral": 0.5099999999999999,
+  "horizonte_dias": 90,
+  "filas_entrenamiento": 38720,
+  "filas_prueba": 25062,
+  "cv_pr_auc": {
+    "Regresion logistica": 0.7249244807257864,
+    "Random Forest": 0.7267741776357741,
+    "Gradient Boosting": 0.7267198487858612
+  },
+  "cv_pr_auc_base": 0.5884442763116162,
+  "test": {
+    "PR-AUC": 0.7373346353557647,
+    "ROC-AUC": 0.799818805847649,
+    "Precision": 0.6244348338903086,
+    "Recall": 0.691595906814718,
+    "F1": 0.656301652892562,
+    "Brier": 0.19015971497390094
+  },
+  "test_base": {
+    "PR-AUC": 0.6226210968308566,
+    "ROC-AUC": 0.7650233031500333
+  },
+  "tasa_base_test": 0.36653100311228154,
+  "tasa_base_train": 0.46133780991735535,
+  "matriz": {
+    "VP": 6353,
+    "FP": 3821,
+    "FN": 2833,
+    "VN": 12055
+  },
+  "ic95_pr_auc": [
+    0.7221412531741792,
+    0.7504838895081213
+  ],
+  "ic95_roc_auc": [
+    0.7901111876974575,
+    0.8076196659860765
+  ],
+  "hiperparametros": {
+    "Regresion logistica": {
+      "C": 0.006026889128682512
+    },
+    "Random Forest": {
+      "max_depth": 6,
+      "max_features": 0.8,
+      "min_samples_leaf": 22,
+      "n_estimators": 238
+    },
+    "Gradient Boosting": {
+      "l2_regularization": 4.337920697490942,
+      "learning_rate": 0.04030685101059539,
+      "max_iter": 81,
+      "max_leaf_nodes": 11,
+      "min_samples_leaf": 73
+    }
+  },
+  "matriz_accion": {
+    "Fieles seguros": 1160,
+    "Estables": 313,
+    "Valiosos en riesgo": 303,
+    "Reactivar": 4076
+  }
+}
