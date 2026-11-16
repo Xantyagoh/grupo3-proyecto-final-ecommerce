@@ -1,0 +1,113 @@
+{
+  "filas_crudas": 1067371,
+  "filas_limpias": 1021326,
+  "ingresos_netos_gbp": 18929107.51,
+  "reglas": [
+    {
+      "regla": "Dataset original",
+      "filas_restantes": 1067371,
+      "filas_eliminadas": 0
+    },
+    {
+      "regla": "R1 duplicados exactos",
+      "filas_restantes": 1033036,
+      "filas_eliminadas": 34335
+    },
+    {
+      "regla": "R2 codigos que no son producto",
+      "filas_restantes": 1027313,
+      "filas_eliminadas": 5723
+    },
+    {
+      "regla": "R3 precio <= 0",
+      "filas_restantes": 1021330,
+      "filas_eliminadas": 5983
+    },
+    {
+      "regla": "R4 cantidad <= 0 sin ser cancelacion",
+      "filas_restantes": 1021330,
+      "filas_eliminadas": 0
+    },
+    {
+      "regla": "R5 pedidos gigantes cancelados a los minutos",
+      "filas_restantes": 1021326,
+      "filas_eliminadas": 4
+    }
+  ],
+  "validaciones": [
+    {
+      "validacion": "duplicados residuales <= 10 lineas",
+      "ok": true
+    },
+    {
+      "validacion": "precio > 0 en todas las lineas",
+      "ok": true
+    },
+    {
+      "validacion": "cantidad > 0 en ventas",
+      "ok": true
+    },
+    {
+      "validacion": "cantidad < 0 en devoluciones",
+      "ok": true
+    },
+    {
+      "validacion": "sin descripcion nula",
+      "ok": true
+    },
+    {
+      "validacion": "importe = cantidad x precio",
+      "ok": true
+    },
+    {
+      "validacion": "fechas dentro del periodo esperado",
+      "ok": true
+    },
+    {
+      "validacion": "fact.fecha -> dim_fecha",
+      "ok": true
+    },
+    {
+      "validacion": "fact.codigo -> dim_producto",
+      "ok": true
+    },
+    {
+      "validacion": "fact.cliente_key -> dim_cliente",
+      "ok": true
+    },
+    {
+      "validacion": "fact.pais -> dim_pais",
+      "ok": true
+    },
+    {
+      "validacion": "llave unica en dim_cliente",
+      "ok": true
+    },
+    {
+      "validacion": "ingresos fact = ingresos tabla limpia",
+      "ok": true
+    }
+  ],
+  "tablas": {
+    "fact_lineas": {
+      "filas": 1021326,
+      "columnas": 11
+    },
+    "dim_fecha": {
+      "filas": 739,
+      "columnas": 11
+    },
+    "dim_producto": {
+      "filas": 4914,
+      "columnas": 3
+    },
+    "dim_cliente": {
+      "filas": 5876,
+      "columnas": 11
+    },
+    "dim_pais": {
+      "filas": 43,
+      "columnas": 3
+    }
+  }
+}
