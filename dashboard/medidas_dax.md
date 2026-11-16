@@ -190,3 +190,29 @@ Recencia Mediana = MEDIAN ( rfm_clientes[recencia] )
 ```
 
 Columnas calculadas en `dim_producto` para la curva de Pareto: `ventas_producto` (ventas brutas del producto), `ranking_producto`, `pct_productos` (ranking ÷ número de productos) y `pct_ingreso_acumulado`.
+
+---
+
+## Página 7 · Modelo predictivo (proyecto final)
+
+Tablas nuevas (se cargan desde `data/processed/modelo_predictivo/`, las genera el notebook 06):
+
+- `scoring_clientes` — una fila por cliente identificado con su probabilidad de recompra a 90 días, decil, segmento de acción y valor en riesgo (corte: 10-dic-2011).
+- `ganancia_deciles` — recompra real, captura acumulada de compradores y de ingreso por decil de probabilidad (periodo de prueba).
+
+Medidas nuevas (tabla `_Medidas`):
+
+```dax
+Clientes Puntuados          = COUNTROWS ( scoring_clientes )
+Prob Recompra Media         = AVERAGE ( scoring_clientes[prob_recompra_90d] )
+Clientes Valiosos en Riesgo = CALCULATE ( COUNTROWS ( scoring_clientes ), scoring_clientes[segmento_accion] = "Valiosos en riesgo" )
+Valor en Riesgo             = SUM ( scoring_clientes[valor_en_riesgo] )
+Gasto Historico Puntuados   = SUM ( scoring_clientes[monetario] )
+Recompra Real por Decil     = SUM ( ganancia_deciles[tasa_real] )
+Captura Compradores Acum    = SUM ( ganancia_deciles[captura_compradores_acum] )
+Captura Ingreso Acum        = SUM ( ganancia_deciles[captura_ingreso_acum] )
+```
+
+Valores de referencia: 5.852 clientes · probabilidad media 33,9 % · 303 valiosos en riesgo · valor en riesgo ≈ £1,08 M.
+
+> **Ruta de datos:** el parámetro `RutaDatos` apunta a la carpeta `data/processed/` del equipo donde se guardó el `.pbix`. Si se abre en otro computador, Power BI pide actualizar: Transformar datos → Administrar parámetros → `RutaDatos` = carpeta `data/processed/` del repositorio clonado (terminada en `\`).
